@@ -11,13 +11,14 @@
             color: white;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             text-align: center;
+            overflow-x: hidden;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             padding: 20px 40px;
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         nav h1 {
@@ -36,24 +37,9 @@
             opacity: 0.6;
         }
 
-        .top-section {
-            margin: 20px 0;
-            font-size: 18px;
-        }
-
-        .top-section a {
-            color: #0d6efd;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        .top-section a:hover {
-            opacity: 0.7;
-        }
-
         .container {
-            padding: 0 20px 40px 20px;
+            padding: 20px;
+            position: relative;
         }
 
         .game-frame {
@@ -109,10 +95,37 @@
             background: rgba(255,255,255,0.25);
         }
 
-        /* Fullscreen icon */
         .fullscreen-button svg {
             width: 24px;
             height: 24px;
+        }
+
+        /* Home button in the corner */
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            padding: 12px 18px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .home-button:hover {
+            color: white;
+            text-shadow: 0 0 8px white, 0 0 16px white, 0 0 24px white;
+            background: rgba(255,255,255,0.25);
         }
 
     </style>
@@ -122,22 +135,15 @@
 
 <nav>
     <h1>MONO</h1>
-    <div>
-        <a href="index.html">Home</a>
-    </div>
 </nav>
 
+<!-- Home button in corner -->
+<a href="index.html" class="home-button">Home</a>
+
 <div class="container">
-    <!-- Top section with Back to Library -->
-    <div class="top-section">
-        <a href="index.html">&larr; Back to Game Library</a>
-    </div>
-
-    <h2>Game 1 - Basketball Random</h2>
-
     <div class="game-frame">
         <div class="iframe-wrapper">
-            <!-- Basketball Random iframe with sandbox to prevent download -->
+            <!-- Basketball Random iframe with sandbox -->
             <iframe id="basketballRandom" 
                     src="https://lablockedgames.com/funblocked/basket-random/index.html"
                     scrolling="no" 
@@ -149,7 +155,6 @@
 
     <!-- Fullscreen button below the game frame -->
     <button class="fullscreen-button" onclick="toggleFullscreen('basketballRandom')">
-        <!-- Fullscreen icon SVG -->
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h6v2H6v4H4V4z"/>
             <path d="M20 4h-6v2h4v4h2V4z"/>
