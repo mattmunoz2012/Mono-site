@@ -1,3 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mono Games - Game 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            background: radial-gradient(circle at top, #111, #000);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px;
+            border-bottom: 1px solid white;
+        }
+
+        nav h1 {
+            letter-spacing: 4px;
+            font-size: 22px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.6;
+        }
+
+        .container {
+            padding: 40px 20px;
+        }
+
+        .game-frame {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            display: inline-block;
+        }
+
+        canvas {
+            background: #111;
+            display: block;
+            margin: auto;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding: 20px;
+            opacity: 0.5;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <h1>MONO</h1>
+    <div>
+        <a href="index.html">Home</a>
+    </div>
+</nav>
+
+<div class="container">
+    <h2>Game 1 - Square Dodge</h2>
+
+    <div class="game-frame">
+        <canvas id="game"></canvas>
+    </div>
+</div>
+
+<footer>
+    © 2026 Mono Games
+</footer>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
 <html>
 <head>
     <base target="_blank">
@@ -55,5 +145,9 @@
             }
         }
     </script>
+</body>
+</html>
+</script>
+
 </body>
 </html>
