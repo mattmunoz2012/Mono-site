@@ -26,52 +26,39 @@
             font-size: 22px;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            opacity: 0.6;
-        }
-
         .container {
             padding: 20px;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
+        /* Game frame sized to fit the iframe exactly */
         .game-frame {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 20px;
             backdrop-filter: blur(15px);
-            padding: 20px;
+            padding: 0; /* remove extra padding */
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        footer {
             margin-top: 40px;
-            padding: 20px;
-            opacity: 0.5;
-            font-size: 14px;
+            width: 700px; /* match iframe width */
         }
 
         .iframe-wrapper {
             position: relative;
-            display: inline-block;
         }
 
         iframe {
             border: none;
             width: 700px;
             height: 550px;
+            border-radius: 20px;
         }
 
-        /* Glass-blur fullscreen button below game frame */
+        /* Fullscreen button below the game frame */
         .fullscreen-button {
             display: inline-flex;
             justify-content: center;
@@ -100,13 +87,12 @@
             height: 24px;
         }
 
-        /* Home button in the corner */
+        /* Centered Home button above game frame */
         .home-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            padding: 12px 18px;
+            position: absolute;
+            top: 0;
+            transform: translateY(-50%);
+            padding: 12px 24px;
             background: rgba(255,255,255,0.15);
             color: white;
             border: 1px solid rgba(255,255,255,0.3);
@@ -118,8 +104,9 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.4);
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: 0.3s;
             font-size: 14px;
+            transition: 0.3s;
+            text-align: center;
         }
 
         .home-button:hover {
@@ -137,10 +124,10 @@
     <h1>MONO</h1>
 </nav>
 
-<!-- Home button in corner -->
-<a href="index.html" class="home-button">Home</a>
-
 <div class="container">
+    <!-- Centered Home button above the game frame -->
+    <a href="index.html" class="home-button">Home</a>
+
     <div class="game-frame">
         <div class="iframe-wrapper">
             <!-- Basketball Random iframe with sandbox -->
