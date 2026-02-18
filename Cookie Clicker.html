@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mono Games - Cookie Clicker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+            background: radial-gradient(circle at top, #111, #000);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            text-align: center;
+        }
+
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        nav h1 {
+            letter-spacing: 4px;
+            font-size: 22px;
+            margin: 0;
+        }
+
+        .container {
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Home button centered above frame */
+        .home-btn {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 14px;
+            border: 1px solid white;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .game-frame {
+            position: relative;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid white;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            padding: 10px;
+            display: inline-block;
+        }
+
+        iframe {
+            border: none;
+            border-radius: 16px;
+            width: 930px;
+            height: 534px;
+            display: block;
+        }
+
+        /* Fullscreen logo button */
+        .fullscreen-btn {
+            margin-top: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 26px;
+            color: white;
+        }
+
+        /* Ownership styling with rainbow animation */
+        .ownership {
+            margin: 20px 0 10px 0;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .owner-name {
+            border: 2px solid;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            background: rgba(255,255,255,0.05);
+            border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1;
+            animation: rainbow-border 4s linear infinite;
+        }
+
+        @keyframes rainbow-border {
+            0% { border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1; }
+            25% { border-image: linear-gradient(90deg, orange, yellow, green, blue, indigo, violet, red) 1; }
+            50% { border-image: linear-gradient(90deg, yellow, green, blue, indigo, violet, red, orange) 1; }
+            75% { border-image: linear-gradient(90deg, green, blue, indigo, violet, red, orange, yellow) 1; }
+            100% { border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1; }
+        }
+
+        footer {
+            margin-top: 60px;
+            padding: 20px;
+            opacity: 0.5;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1000px) {
+            iframe {
+                width: 95vw;
+                height: 55vw;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <h1>MONO</h1>
+</nav>
+
+<div class="container">
+
+    <!-- Centered Home Button -->
+    <a href="index.html" class="home-btn">HOME</a>
+
+    <!-- Game Frame -->
+    <div class="game-frame">
+        <iframe id="cookieGame" src="/cookie/index.html" allowfullscreen loading="lazy"></iframe>
+    </div>
+
+    <!-- Fullscreen Logo Only -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶</button>
+
+</div>
+
+<!-- Ownership Line -->
+<div class="ownership">By <span class="owner-name">Matthew M</span></div>
+
+<footer>
+    © 2026 Mono Games
+</footer>
+
+<script>
+    function toggleFullscreen() {
+        const iframe = document.getElementById("cookieGame");
+        if (!document.fullscreenElement) {
+            iframe.requestFullscreen().catch(err => console.log(err));
+        } else {
+            document.exitFullscreen();
+        }
+    }
+</script>
+
+</body>
+</html>
