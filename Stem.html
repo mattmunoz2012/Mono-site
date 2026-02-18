@@ -1,130 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Geometry Dash Lite</title>
-<style>
-body {
-    margin: 0;
-    background: #0f0f0f;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    <meta charset="UTF-8">
+    <title>Mono Games - Geometry Dash Lite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-/* Top navigation header */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1000px;
-    padding: 20px 40px;
-    border-bottom: 1px solid white;
-    box-sizing: border-box;
-}
+    <style>
+        body {
+            margin: 0;
+            background: radial-gradient(circle at top, #111, #000);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            text-align: center;
+        }
 
-nav h1 {
-    color: white;
-    letter-spacing: 4px;
-    font-size: 22px;
-    margin: 0;
-}
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
 
-/* Container for content below nav */
-.content-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
+        nav h1 {
+            letter-spacing: 4px;
+            font-size: 22px;
+            margin: 0;
+        }
 
-/* Home button above frame */
-.home-btn {
-    margin: 20px 0;
-    padding: 10px 25px;
-    font-size: 16px;
-    color: white;
-    background: rgba(255,255,255,0.05);
-    border: 2px solid white;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    transition: 0.2s ease;
-}
+        .container {
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.home-btn:hover {
-    background: rgba(255,255,255,0.2);
-}
+        /* Home button centered above frame */
+        .home-btn {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 14px;
+            border: 1px solid white;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
 
-/* Game frame wrapper */
-.game-frame {
-    width: 850px;
-    height: 638px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 12px;
-    border: 3px solid white;
-    backdrop-filter: blur(15px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 10px;
-}
+        .game-frame {
+            position: relative;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid white;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            padding: 10px;
+            display: inline-block;
+        }
 
-/* Fullscreen icon below frame */
-.fullscreen-btn {
-    font-size: 20px;
-    cursor: pointer;
-    color: white;
-    margin-bottom: 40px;
-}
+        iframe {
+            border: none;
+            border-radius: 16px;
+            width: 930px;
+            height: 534px;
+            display: block;
+        }
 
-/* Iframe inside frame */
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-</style>
+        /* Fullscreen logo button */
+        .fullscreen-btn {
+            margin-top: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 26px;
+            color: white;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding: 20px;
+            opacity: 0.5;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            iframe {
+                width: 95vw;
+                height: 55vw;
+            }
+        }
+
+    </style>
 </head>
 <body>
 
-<!-- Navigation Header -->
 <nav>
     <h1>MONO</h1>
-    <div></div>
 </nav>
 
-<!-- Content below nav -->
-<div class="content-container">
-    <!-- Home Button -->
+<div class="container">
+
+    <!-- Centered Home Button -->
     <a href="index.html" class="home-btn">HOME</a>
 
     <!-- Game Frame -->
     <div class="game-frame">
-        <iframe src="https://ozgames.io/geometry-dash.embed" allowfullscreen></iframe>
+        <iframe id="game3"
+            src="https://ozgames.io/geometry-dash.embed"
+            allowfullscreen
+            loading="lazy">
+        </iframe>
     </div>
 
-    <!-- Fullscreen Icon -->
-    <div class="fullscreen-btn" onclick="goFullscreen()">⛶</div>
+    <!-- Fullscreen Logo Only -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶</button>
+
 </div>
 
+<footer>
+    © 2026 Mono Games
+</footer>
+
 <script>
-function goFullscreen() {
-    const iframe = document.querySelector(".game-frame iframe");
-    if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-    } else if (iframe.webkitRequestFullscreen) {
-        iframe.webkitRequestFullscreen();
-    } else if (iframe.msRequestFullscreen) {
-        iframe.msRequestFullscreen();
+    function toggleFullscreen() {
+        const iframe = document.getElementById("game3");
+        if (!document.fullscreenElement) {
+            iframe.requestFullscreen().catch(err => console.log(err));
+        } else {
+            document.exitFullscreen();
+        }
     }
-}
 </script>
 
 </body>
