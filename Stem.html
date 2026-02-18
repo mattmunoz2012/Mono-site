@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Geometry Dash Lite</title>
-
 <style>
 body {
     margin: 0;
@@ -15,68 +14,73 @@ body {
     align-items: center;
 }
 
-/* Home Button */
+/* Home Button above the frame */
 .home-btn {
     margin-top: 30px;
     margin-bottom: 20px;
     padding: 10px 25px;
     font-size: 16px;
     color: white;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
     border: 2px solid white;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
+    text-align: center;
     transition: 0.2s ease;
 }
 
 .home-btn:hover {
-    background: white;
-    color: black;
+    background: rgba(255,255,255,0.2);
 }
 
-/* Game Container */
-.game-wrapper {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 12px;
-    border: 3px solid white;
-}
-
-/* Fullscreen Icon */
-.fullscreen-btn {
-    text-align: right;
-    margin-bottom: 8px;
-    cursor: pointer;
-    color: white;
-    font-size: 18px;
-}
-
-/* Iframe EXACT SIZE */
-iframe {
+/* Game frame wrapper with same styling as previous games */
+.game-frame {
     width: 850px;
     height: 638px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    border: 3px solid white;
+    backdrop-filter: blur(15px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Fullscreen button directly under the frame */
+.fullscreen-btn {
+    margin-top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Iframe inside frame */
+iframe {
+    width: 100%;
+    height: 100%;
     border: none;
 }
 </style>
 </head>
-
 <body>
 
+<!-- Home Button -->
 <a href="index.html" class="home-btn">HOME</a>
 
-<div class="game-wrapper">
-    <div class="fullscreen-btn" onclick="goFullscreen()">⛶</div>
-
-    <iframe 
-        src="https://ozgames.io/geometry-dash.embed"
-        allowfullscreen>
-    </iframe>
+<!-- Game Frame -->
+<div class="game-frame">
+    <iframe src="https://ozgames.io/geometry-dash.embed" allowfullscreen></iframe>
 </div>
+
+<!-- Fullscreen Icon under the frame -->
+<div class="fullscreen-btn" onclick="goFullscreen()">⛶</div>
 
 <script>
 function goFullscreen() {
-    const iframe = document.querySelector("iframe");
+    const iframe = document.querySelector(".game-frame iframe");
     if (iframe.requestFullscreen) {
         iframe.requestFullscreen();
     } else if (iframe.webkitRequestFullscreen) {
