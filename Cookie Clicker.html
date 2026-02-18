@@ -51,14 +51,15 @@
             border-radius: 20px;
             backdrop-filter: blur(15px);
             padding: 10px;
-            display: inline-block;
+            width: 930px;
+            height: 534px;
         }
 
         iframe {
             border: none;
             border-radius: 16px;
-            width: 930px;
-            height: 534px;
+            width: 100%;
+            height: 100%;
             display: block;
         }
 
@@ -104,12 +105,11 @@
         }
 
         @media (max-width: 1000px) {
-            iframe {
+            .game-frame {
                 width: 95vw;
                 height: 55vw;
             }
         }
-
     </style>
 </head>
 <body>
@@ -120,20 +120,24 @@
 
 <div class="container">
 
+    <!-- Centered HOME button -->
     <a href="index.html" class="home-btn">HOME</a>
 
+    <!-- Game Frame -->
     <div class="game-frame">
         <iframe id="cookieGame"
-            src="https://cookieclicker-unblocked-online.github.io/"
+            src="https://cookie-clicker-game.gitlab.io/embed/cookie-clicker.html"
             allowfullscreen
             loading="lazy">
         </iframe>
     </div>
 
+    <!-- Fullscreen Logo Button -->
     <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶</button>
 
 </div>
 
+<!-- Rainbow Ownership -->
 <div class="ownership">By <span class="owner-name">Matthew M</span></div>
 
 <footer>
