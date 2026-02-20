@@ -6,7 +6,6 @@
 
     <!-- Favicon for browsers -->
     <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
-    <!-- Mobile app icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
@@ -50,17 +49,12 @@
             display: flex;
             justify-content: center;
             margin-top: 40px;
-            width: 1280px; /* match the game's canvas width */
-        }
-
-        .iframe-wrapper {
-            position: relative;
         }
 
         iframe {
             border: none;
-            width: 1280px;  /* match the game's canvas width */
-            height: 720px;  /* match the game's canvas height */
+            width: 1280px;
+            height: 720px;
             border-radius: 20px;
         }
 
@@ -118,7 +112,6 @@
             text-shadow: 0 0 8px white, 0 0 16px white, 0 0 24px white;
             background: rgba(255,255,255,0.25);
         }
-
     </style>
 </head>
 
@@ -132,18 +125,16 @@
     <a href="index.html" class="home-button">Home</a>
 
     <div class="game-frame">
-        <div class="iframe-wrapper">
-            <!-- Embed FNAF game without touching its code -->
-            <iframe 
-                src="https://cdn.jsdelivr.net/gh/genizy/fnaf@latest/1/index.html" 
-                scrolling="no"
-                allowfullscreen
-                sandbox="allow-scripts allow-same-origin">
-            </iframe>
-        </div>
+        <!-- FNAF game embedded in iframe (game code untouched) -->
+        <iframe 
+            src="https://cdn.jsdelivr.net/gh/genizy/fnaf@latest/1/index.html" 
+            scrolling="no"
+            allowfullscreen
+            sandbox="allow-scripts allow-same-origin">
+        </iframe>
     </div>
 
-    <button class="fullscreen-button" onclick="toggleFullscreen(this.previousElementSibling.querySelector('iframe'))">
+    <button class="fullscreen-button" onclick="toggleFullscreen(this.previousElementSibling)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h6v2H6v4H4V4z"/>
             <path d="M20 4h-6v2h4v4h2V4z"/>
