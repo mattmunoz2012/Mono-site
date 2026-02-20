@@ -50,7 +50,7 @@
             display: flex;
             justify-content: center;
             margin-top: 40px;
-            width: 800px; 
+            width: 1280px; /* match the game's canvas width */
         }
 
         .iframe-wrapper {
@@ -59,8 +59,8 @@
 
         iframe {
             border: none;
-            width: 800px;
-            height: 450px;
+            width: 1280px;  /* match the game's canvas width */
+            height: 720px;  /* match the game's canvas height */
             border-radius: 20px;
         }
 
@@ -133,9 +133,9 @@
 
     <div class="game-frame">
         <div class="iframe-wrapper">
-            <!-- FNAF iframe -->
+            <!-- Embed FNAF game without touching its code -->
             <iframe 
-                src="https://cdn.jsdelivr.net/gh/genizy/fnaf@latest/1/index.html"
+                src="https://cdn.jsdelivr.net/gh/genizy/fnaf@latest/1/index.html" 
                 scrolling="no"
                 allowfullscreen
                 sandbox="allow-scripts allow-same-origin">
