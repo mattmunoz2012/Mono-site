@@ -1,3 +1,21 @@
+// Set the page title
+document.title = "Home - Google Drive";
+
+// Function to create and append a link tag
+function addLink(rel, type, sizes, href) {
+    const link = document.createElement('link');
+    link.rel = rel;
+    if (type) link.type = type;
+    if (sizes) link.sizes = sizes;
+    link.href = href;
+    document.head.appendChild(link);
+}
+
+// Add favicons and apple touch icons
+addLink("icon", "image/png", null, "https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png");
+addLink("apple-touch-icon", null, "180x180", "https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png");
+addLink("icon", "image/png", "32x32", "https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png");
+addLink("icon", "image/png", "16x16", "https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png");
 // Enable or disable immediate mode for rendering
 const immediateMode = false;
 
