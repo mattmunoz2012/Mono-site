@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home - Google Drive</title>
+    <title>Mono Games - One Night at Greddy's</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Favicon for browsers -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
 
     <style>
         body {
@@ -32,7 +29,7 @@
             font-size: 22px;
         }
 
-        .container {
+        .container-wrapper {
             padding: 20px;
             position: relative;
             display: flex;
@@ -107,42 +104,45 @@
         }
     </style>
 </head>
-
 <body>
 
 <nav>
     <h1>MONO</h1>
 </nav>
 
-<div class="container">
+<div class="container-wrapper">
     <a href="index.html" class="home-button">Home</a>
 
     <div class="game-frame">
-        <!-- FNAF game code untouched -->
-        <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    
-<body>
-    <div style="display: inline-block; -webkit-user-select: none; text-align: left">
-        <canvas id="MMFCanvas" width="24" height="24"> Your browser does not support Canvas, Please try again. </canvas>
-    </div>
-    <div id="progress-container">
-        <div style="margin-bottom: 6px;">Downloading... <span id="download-text">0%</span></div>
-        <div style="width: 100%; background: #444; border-radius: 6px; overflow: hidden;">
-            <div id="download-bar" style="height: 10px; background: #3b82f6; width: 0%; transition: width 0.2s;"></div>
+        <!-- One Night at Greddy's code untouched -->
+        <div class="container" id="start-screen">
+            <div class="static"></div>
+            <div class="start">
+                <audio preload="auto" id="menu-start" src="resources/audio/darkness%20music.wav" loop="loop"></audio>
+                <aside class="menu">
+                    <h1>One<br> Night <br>at<br> Greddy's</h1>
+                    <a href="main.html" id="start-game" onclick="javascript:night=1;">Start Game</a>
+                    <a href="main.html" id="continue-game" class="display-0">Continue <p>Night <span id="night-no">2</span></p></a>
+                </aside>
+            </div>
         </div>
-        <div style="margin: 12px 0 6px;">Extracting... <span id="extract-text">0%</span></div>
-        <div style="width: 100%; background: #444; border-radius: 6px; overflow: hidden;">
-            <div id="extract-bar" style="height: 10px; background: #10b981; width: 0%; transition: width 0.2s;"></div>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="main.js"></script>
-</body>
 
-</html>
+        <script type="text/javascript" src="js/jquery-2.2.4.js"></script>
+        <script type="text/javascript" src="js/scratch-js.js"></script>
+        <script>
+            $(document).ready(function() {
+                console.log("Sound is playing?");
+                $("#menu-start").get(0).play();
+
+                var getNight = localStorage.getItem('night');
+                var getTimesPlayed = localStorage.getItem('timesPlayed');
+
+                if (parseInt(getTimesPlayed) > 0) {
+                    $('#night-no').html(getNight);
+                    $('#continue-game').removeClass('display-0');
+                }
+            });
+        </script>
     </div>
 
     <button class="fullscreen-button" onclick="toggleFullscreen()">
@@ -161,9 +161,9 @@
 
 <script>
     function toggleFullscreen() {
-        const canvas = document.getElementById('MMFCanvas');
+        const container = document.getElementById('start-screen');
         if (!document.fullscreenElement) {
-            canvas.requestFullscreen().catch(err => {
+            container.requestFullscreen().catch(err => {
                 console.error(`Error attempting fullscreen: ${err.message} (${err.name})`);
             });
         } else {
