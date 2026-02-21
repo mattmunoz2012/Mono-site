@@ -26,10 +26,7 @@ body {
 /* Dynamic Starfield Background */
 .stars-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     z-index: -1;
     background: radial-gradient(circle at center, #1a0b2e 0%, #000 100%);
 }
@@ -47,7 +44,7 @@ body {
     50% { opacity: 1; transform: scale(1.2); }
 }
 
-/* Purple Glass Navbar */
+/* Navbar */
 nav {
     display: flex;
     justify-content: center;
@@ -82,7 +79,7 @@ nav h1 {
     gap: 30px;
 }
 
-/* Purple Glass Game Cards */
+/* Game Cards */
 .card {
     position: relative;
     aspect-ratio: 1/1;
@@ -99,35 +96,53 @@ nav h1 {
     text-decoration: none;
 }
 
-/* CSS for Game Pictures */
 .card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     z-index: 1;
     transition: transform 0.5s ease;
 }
 
-/* Hide the image element if the src is empty so the blob shows */
-.card img[src=""], .card img:not([src]) {
-    display: none;
+/* NEW: Purple Glass UI Label for Game Names */
+.card-label {
+    position: absolute;
+    bottom: 15px;
+    width: 80%;
+    background: rgba(20, 5, 35, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--accent-purple);
+    padding: 8px 5px;
+    border-radius: 12px;
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    z-index: 5;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
 }
 
-.card:hover img {
-    transform: scale(1.1);
+.card:hover .card-label {
+    background: var(--accent-purple);
+    color: black;
+    box-shadow: 0 0 20px var(--accent-purple);
 }
+
+.card img[src=""], .card img:not([src]) { display: none; }
+
+.card:hover img { transform: scale(1.1); }
 
 .card:hover {
     transform: translateY(-10px);
-    background: rgba(186, 103, 255, 0.15);
     border-color: var(--accent-purple);
     box-shadow: 0 0 30px rgba(186, 103, 255, 0.3);
 }
 
-/* Pulsing Purple Glow (Shows if no image is present) */
+/* Blob effect */
 .blob {
     width: 60px;
     height: 60px;
@@ -144,62 +159,14 @@ nav h1 {
     50% { transform: scale(1.5); opacity: 0.6; }
 }
 
-/* Trace Animation Border */
-.card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    border-radius: 28px;
-    border: 2px solid var(--accent-purple);
-    box-sizing: border-box;
-    pointer-events: none;
-    opacity: 0;
-    z-index: 2;
-}
-
-.card:hover::after {
-    opacity: 1;
-    animation: trace 1.5s linear infinite;
-}
-
-@keyframes trace {
-    0%   { clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0); }
-    25%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0); }
-    50%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%); }
-    75%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%); }
-    100% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0); }
-}
-
-/* Footer & Signature */
-.ownership {
-    margin-top: 50px;
-    color: rgba(255,255,255,0.4);
-    font-size: 12px;
-    letter-spacing: 2px;
-}
-
-.owner-name {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 25px;
-    border-radius: 50px;
-    color: white;
-    font-weight: bold;
-    background: rgba(186, 103, 255, 0.1);
-    border: 1px solid var(--accent-purple);
-    box-shadow: 0 0 15px rgba(186, 103, 255, 0.4);
-}
-
-footer {
-    padding: 40px;
-    color: #333;
-    font-size: 11px;
-}
+/* Ownership & Footer */
+.ownership { margin-top: 50px; color: rgba(255,255,255,0.4); font-size: 12px; letter-spacing: 2px; }
+.owner-name { display: inline-block; margin-top: 10px; padding: 10px 25px; border-radius: 50px; color: white; font-weight: bold; background: rgba(186, 103, 255, 0.1); border: 1px solid var(--accent-purple); box-shadow: 0 0 15px rgba(186, 103, 255, 0.4); }
+footer { padding: 40px; color: #333; font-size: 11px; }
 </style>
 </head>
 
 <body>
-
 <div class="stars-container" id="stars"></div>
 
 <nav>
@@ -209,28 +176,39 @@ footer {
 <div class="container">
     <a href="Game1.html" class="card">
         <img src="https://m.media-amazon.com/images/M/MV5BNGIyZDE4OTYtNjBhOS00NzFkLTkyYWMtYzAzNWUxZThmMDBlXkEyXkFqcGc@._V1_.jpg">
+        <div class="card-label">ULTRAKILL</div>
         <div class="blob"></div>
     </a>
 
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
-    <a href="#" class="card"><img src=""><div class="blob"></div></a>
+    <a href="#" class="card">
+        <img src="">
+        <div class="card-label">GAME NAME</div>
+        <div class="blob"></div>
+    </a>
+
+    <a href="#" class="card">
+        <img src="">
+        <div class="card-label">GAME NAME</div>
+        <div class="blob"></div>
+    </a>
+
+    <a href="#" class="card"><img src=""><div class="card-label">Game Name</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
+    <a href="#" class="card"><img src=""><div class="card-label">GAME NAME</div><div class="blob"></div></a>
 </div>
 
 <div class="ownership">CURATED BY<br><span class="owner-name">Matthew M</span></div>
