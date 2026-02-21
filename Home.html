@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-cloaked="false">
 <head>
 <title>Home - Google Drive</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -168,38 +168,28 @@ nav h1 {
 
 <script>
 window.onload = function() {
-    if (window !== window.top) return;
+    // 1. Check if we've already "cloaked" this page. If yes, stop here.
+    if (document.documentElement.getAttribute('data-cloaked') === 'true') return;
 
+    // 2. Open the about:blank tab
     const newTab = window.open('about:blank', '_blank');
     if (newTab) {
-        const favicon = document.querySelector("link[rel~='icon']");
-        const faviconHref = favicon ? favicon.href : '';
+        // 3. Mark the current HTML as "cloaked" so the new tab doesn't try to open another tab
+        document.documentElement.setAttribute('data-cloaked', 'true');
+        
+        // 4. Get the entire HTML of this page
+        const pageContent = document.documentElement.outerHTML;
 
-        newTab.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>${document.title}</title>
-                ${faviconHref ? `<link rel="icon" href="${faviconHref}">` : ''}
-                <style>
-                    body { margin: 0; padding: 0; overflow: hidden; }
-                    iframe { border: none; width: 100vw; height: 100vh; display: block; }
-                </style>
-            </head>
-            <body>
-                <iframe src="${window.location.href}"></iframe>
-            </body>
-            </html>
-        `);
+        // 5. Write that HTML directly into the new tab
+        newTab.document.open();
+        newTab.document.write(pageContent);
         newTab.document.close();
 
-        // Attempt to close the current tab
+        // 6. Close the original tab or redirect to Google
         window.close();
-        
-        // Fallback: If window.close() is blocked, redirect to Google 
         setTimeout(() => {
             window.location.replace("https://www.google.com");
-        }, 100);
+        }, 150);
     }
 };
 </script>
