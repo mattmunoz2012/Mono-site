@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>ULTRAKILL - Google Drive</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
-
+    <title>Home - Google Drive</title>
     <style>
         :root {
             --glass-bg: rgba(45, 15, 66, 0.4);
@@ -15,137 +12,72 @@
         body {
             margin: 0;
             background: #000;
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            font-family: sans-serif;
             overflow: hidden;
         }
 
-        /* Star Background */
-        .stars-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #1a0b2e 0%, #000 100%);
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* The Glass Frame */
-        .game-container {
-            position: relative;
-            width: 90vw;
+        /* The Frame Container */
+        .game-wrapper {
+            width: 95vw;
             height: 85vh;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
         }
 
-        /* The UNTOUCHED Game Iframe */
-        #gameFrame {
+        /* The Iframe - Essential attributes added for Unity Games */
+        iframe {
             width: 100%;
-            flex-grow: 1;
+            height: 100%;
             border: none;
-            background: #000;
+            flex-grow: 1;
         }
 
-        /* Purple Glass Controls */
-        .control-bar {
-            height: 60px;
-            background: rgba(10, 5, 20, 0.9);
+        .bar {
+            height: 50px;
+            background: rgba(20, 10, 30, 0.9);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 25px;
+            padding: 0 20px;
             border-top: 1px solid var(--glass-border);
         }
 
         .btn {
-            background: rgba(186, 103, 255, 0.1);
-            border: 1px solid var(--accent-purple);
             color: white;
-            padding: 8px 18px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 11px;
-            transition: 0.3s;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn:hover {
-            background: var(--accent-purple);
-            box-shadow: 0 0 15px var(--accent-purple);
-        }
-
-        .status {
-            font-size: 10px;
-            color: var(--accent-purple);
-            letter-spacing: 2px;
-            font-weight: bold;
+            border: 1px solid var(--accent-purple);
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            background: rgba(186, 103, 255, 0.1);
         }
     </style>
 </head>
 <body>
 
-<div class="stars-container" id="stars"></div>
+<div class="game-wrapper">
+    <iframe 
+        src="./ULTRAKILL.html" 
+        id="game" 
+        allow="fullscreen; autoplay; gamepad; keyboard" 
+        loading="lazy">
+    </iframe>
 
-<div class="game-container">
-    <iframe src="ULTRAKILL.html" id="gameFrame" allow="fullscreen; autoplay; gamepad; keyboard"></iframe>
-
-    <div class="control-bar">
-        <a href="index.html" class="btn">HOME</a>
-        <div class="status">ULTRAKILL LOADED</div>
-        <button class="btn" onclick="toggleFS()">FULLSCREEN</button>
+    <div class="bar">
+        <a href="./index.html" class="btn">HOME</a>
+        <button class="btn" onclick="document.getElementById('game').requestFullscreen()">FULLSCREEN</button>
     </div>
 </div>
-
-<script>
-    // Stars
-    const starsContainer = document.getElementById('stars');
-    for (let i = 0; i < 80; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        const size = Math.random() * 2 + 'px';
-        star.style.width = size; star.style.height = size;
-        star.style.top = Math.random() * 100 + '%';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-        starsContainer.appendChild(star);
-    }
-
-    // Direct Fullscreen Toggle
-    function toggleFS() {
-        const f = document.getElementById("gameFrame");
-        if (f.requestFullscreen) f.requestFullscreen();
-        else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen();
-    }
-</script>
 
 </body>
 </html>
