@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-cloaked="false">
 <head>
 <title>Home - Google Drive</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,42 +11,75 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
 
 <style>
-body {
-    margin: 0;
-    background: radial-gradient(circle at top, #111, #000);
-    color: white;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    text-align: center;
+:root {
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent: #ffffff;
 }
 
+body {
+    margin: 0;
+    /* Animated deep space background */
+    background: radial-gradient(circle at 50% 0%, #1a1a1a, #000);
+    background-attachment: fixed;
+    color: white;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* Modern Glass Navbar */
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 25px 40px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 nav h1 {
-    letter-spacing: 4px;
-    font-size: 22px;
+    margin: 0;
+    letter-spacing: 12px;
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(to bottom, #fff, #888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
 }
 
+/* Responsive Grid Layout */
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 40px 20px;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 30px;
+    gap: 40px;
 }
 
+/* Enhanced Premium Cards */
 .card {
     position: relative;
-    width: 200px;
-    height: 200px;
-    border-radius: 20px;
+    aspect-ratio: 1/1;
+    background: var(--card-bg);
+    border-radius: 24px;
     overflow: hidden;
     cursor: pointer;
+    border: 1px solid var(--glass-border);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .card img {
@@ -54,8 +87,14 @@ nav h1 {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.5s ease;
 }
 
+.card:hover img {
+    transform: scale(1.1);
+}
+
+/* FIXED Trace Animation Logic */
 .card::after {
     content: '';
     position: absolute;
@@ -63,68 +102,81 @@ nav h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 20px;
-    border: 2px solid white;
+    border-radius: 24px;
+    border: 3px solid white;
     box-sizing: border-box;
     pointer-events: none;
-    animation: trace 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+/* Only trace on hover for a cleaner look */
+.card:hover::after {
+    opacity: 1;
+    animation: trace 2s linear infinite;
 }
 
 @keyframes trace {
-    0% { clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%); }
-    25% { clip-path: polygon(0% 0%, 100% 0%, 0% 0%, 0% 0%); }
-    50% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%); }
-    75% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
-    100% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%); }
+    0%   { clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0); }
+    25%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0); }
+    50%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%); }
+    75%  { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%); }
+    100% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0); }
 }
 
+/* Glow Blob inside card */
 .blob {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     background: white;
     border-radius: 50%;
-    opacity: 0.1;
-    filter: blur(20px);
+    opacity: 0.15;
+    filter: blur(40px);
     transform: translate(-50%, -50%);
-    animation: blobMove 6s infinite alternate;
-    z-index: 0;
+    animation: blobMove 8s infinite ease-in-out;
+    z-index: 1;
 }
 
 @keyframes blobMove {
-    0% { transform: translate(-50%, -50%) translate(0px, 0px); }
-    25% { transform: translate(-50%, -50%) translate(20px, -10px); }
-    50% { transform: translate(-50%, -50%) translate(0px, 20px); }
-    75% { transform: translate(-50%, -50%) translate(-20px, -10px); }
-    100% { transform: translate(-50%, -50%) translate(0px, 0px); }
+    0%, 100% { transform: translate(-70%, -70%); }
+    50% { transform: translate(-30%, -30%); }
 }
 
+/* Ownership Styling */
 .ownership {
-    margin: 20px 0 10px 0;
-    font-size: 16px;
-    color: white;
-    text-align: center;
+    margin: 80px 0 20px 0;
+    font-size: 14px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .owner-name {
-    border: 2px solid;
-    padding: 4px 10px;
-    border-radius: 8px;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 20px;
+    border-radius: 12px;
+    color: white;
     font-weight: bold;
-    letter-spacing: 1px;
     background: rgba(255,255,255,0.05);
+    border: 1px solid transparent;
     border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1;
     animation: rainbow-border 4s linear infinite;
 }
 
 @keyframes rainbow-border {
-    0% { border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1; }
-    25% { border-image: linear-gradient(90deg, orange, yellow, green, blue, indigo, violet, red) 1; }
-    50% { border-image: linear-gradient(90deg, yellow, green, blue, indigo, violet, red, orange) 1; }
-    75% { border-image: linear-gradient(90deg, green, blue, indigo, violet, red, orange, yellow) 1; }
-    100% { border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1; }
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+footer {
+    padding-bottom: 40px;
+    font-size: 12px;
+    color: #444;
 }
 </style>
 </head>
@@ -136,30 +188,29 @@ nav h1 {
 </nav>
 
 <div class="container">
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 1"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 2"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 3"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 4"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 5"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 6"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 7"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 8"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 9"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 10"></a>
-
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 11"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 12"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 13"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 14"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 15"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 16"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 17"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 18"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 19"></a>
-    <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 20"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=1" alt="Game 1"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=2" alt="Game 2"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=3" alt="Game 3"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=4" alt="Game 4"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=5" alt="Game 5"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=6" alt="Game 6"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=7" alt="Game 7"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=8" alt="Game 8"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=9" alt="Game 9"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=10" alt="Game 10"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=11" alt="Game 11"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=12" alt="Game 12"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=13" alt="Game 13"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=14" alt="Game 14"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=15" alt="Game 15"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=16" alt="Game 16"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=17" alt="Game 17"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=18" alt="Game 18"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=19" alt="Game 19"></a>
+    <a href="#" class="card"><div class="blob"></div><img src="https://picsum.photos/400/400?random=20" alt="Game 20"></a>
 </div>
 
-<div class="ownership">By <span class="owner-name">Matthew M</span></div>
+<div class="ownership">Maintained By <br> <span class="owner-name">Matthew M</span></div>
 
 <footer>
 © 2026 Home - Google Drive
@@ -167,43 +218,23 @@ nav h1 {
 
 <script>
 window.onload = function() {
-    // Prevent infinite loops if this page is already inside the about:blank iframe
+    if (document.documentElement.getAttribute('data-cloaked') === 'true') return;
     if (window !== window.top) return;
 
     const newTab = window.open('about:blank', '_blank');
-    
-    // If a popup blocker stops the tab from opening, exit the function
-    if (!newTab) return;
+    if (newTab) {
+        document.documentElement.setAttribute('data-cloaked', 'true');
+        const pageContent = document.documentElement.outerHTML;
 
-    // Get current favicon
-    const favicon = document.querySelector("link[rel~='icon']");
-    const faviconHref = favicon ? favicon.href : '';
+        newTab.document.open();
+        newTab.document.write(pageContent);
+        newTab.document.close();
 
-    newTab.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>${document.title}</title>
-            ${faviconHref ? `<link rel="icon" href="${faviconHref}">` : ''}
-            <style>
-                body { margin: 0; overflow: hidden; }
-                iframe {
-                    border: none;
-                    width: 100vw;
-                    height: 100vh;
-                }
-            </style>
-        </head>
-        <body>
-            <iframe src="${window.location.href}"></iframe>
-        </body>
-        </html>
-    `);
-
-    newTab.document.close();
-    
-    // Optional: Redirect the original, unconcealed tab to Google so it looks like you were just searching
-    // window.location.replace('https://www.google.com'); 
+        window.close();
+        setTimeout(() => {
+            window.location.replace("https://www.google.com");
+        }, 150);
+    }
 };
 </script>
 </body>
