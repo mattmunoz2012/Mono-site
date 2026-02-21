@@ -4,10 +4,8 @@
 <title>Home - Google Drive</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Favicon for browsers -->
 <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
 
-<!-- Mobile app icons -->
 <link rel="apple-touch-icon" sizes="180x180" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://static.vecteezy.com/system/resources/previews/012/871/368/non_2x/google-drive-icon-google-product-illustration-free-png.png">
@@ -32,24 +30,6 @@ nav {
 nav h1 {
     letter-spacing: 4px;
     font-size: 22px;
-}
-
-/* Disguiser Button */
-.disguiser-btn {
-    padding: 8px 16px;
-    background: rgba(255,255,255,0.15);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    backdrop-filter: blur(8px);
-    transition: 0.3s ease;
-}
-
-.disguiser-btn:hover {
-    background: rgba(255,255,255,0.25);
-    transform: scale(1.05);
 }
 
 .container {
@@ -153,11 +133,9 @@ nav h1 {
 
 <nav>
     <h1>MONO</h1>
-    <button class="disguiser-btn" onclick="openInBlank()">Disguiser</button>
 </nav>
 
 <div class="container">
-    <!-- Row 1 - 10 game cards -->
     <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 1"></a>
     <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 2"></a>
     <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 3"></a>
@@ -169,7 +147,6 @@ nav h1 {
     <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 9"></a>
     <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 10"></a>
 
-    <!-- Row 2 - 10 game cards -->
     <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 11"></a>
     <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 12"></a>
     <a href="#" class="card"><div class="blob"></div><img src="#" alt="Game 13"></a>
@@ -189,8 +166,13 @@ nav h1 {
 </footer>
 
 <script>
-function openInBlank() {
+window.onload = function() {
+    // Prevent infinite loops if this page is already inside the about:blank iframe
+    if (window !== window.top) return;
+
     const newTab = window.open('about:blank', '_blank');
+    
+    // If a popup blocker stops the tab from opening, exit the function
     if (!newTab) return;
 
     // Get current favicon
@@ -202,11 +184,9 @@ function openInBlank() {
         <html>
         <head>
             <title>${document.title}</title>
-
             ${faviconHref ? `<link rel="icon" href="${faviconHref}">` : ''}
-
             <style>
-                body { margin: 0; }
+                body { margin: 0; overflow: hidden; }
                 iframe {
                     border: none;
                     width: 100vw;
@@ -221,5 +201,10 @@ function openInBlank() {
     `);
 
     newTab.document.close();
-}
+    
+    // Optional: Redirect the original, unconcealed tab to Google so it looks like you were just searching
+    // window.location.replace('https://www.google.com'); 
+};
 </script>
+</body>
+</html>
