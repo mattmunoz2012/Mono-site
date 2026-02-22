@@ -1,3 +1,10 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L7856P3VNT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L7856P3VNT');
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,16 +17,27 @@
 
     <base href="https://cdn.jsdelivr.net/gh/genizy/fnaf@latest/1/">
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="HandheldFriendly" content="true" />
-    <title>Five Nights at Freddy's 1</title>
 
     <style>
-        /* PURPLE GLASS BUTTON THEME */
+        /* BASE PAGE STYLING FROM ULTRAKILL */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* FLOATING UI BUTTONS THEME */
         .floating-controls {
             position: fixed;
             bottom: 20px;
@@ -41,6 +59,7 @@
             font-family: sans-serif;
             font-weight: bold;
             font-size: 13px;
+            text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: 0.3s;
@@ -51,6 +70,14 @@
             background: #ba67ff;
             box-shadow: 0 0 20px rgba(186, 103, 255, 0.6);
             transform: translateY(-2px);
+        }
+
+        /* FNAF PROGRESS BAR CENTERING */
+        #progress-container {
+            position: absolute;
+            width: 300px;
+            color: white;
+            z-index: 10;
         }
     </style>
 </head>
@@ -64,6 +91,7 @@
     <div style="display: inline-block; -webkit-user-select: none; text-align: left">
         <canvas id="MMFCanvas" width="1280" height="720"> Your browser does not support Canvas, Please try again. </canvas>
     </div>
+
     <div id="progress-container">
         <div style="margin-bottom: 6px;">Downloading... <span id="download-text">0%</span></div>
         <div style="width: 100%; background: #444; border-radius: 6px; overflow: hidden;">
@@ -76,7 +104,7 @@
     </div>
 
     <script>
-        // BUTTON FUNCTIONS
+        // BUTTON LOGIC
         function goHome() {
             window.location.href = window.location.origin + "/index.html";
         }
