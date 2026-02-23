@@ -6,20 +6,20 @@
   gtag('config', 'G-L7856P3VNT');
 </script>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@de75523557e46f375fc9173a9a0c0d34d8ed34f9/thats-not-my-neighbor/">
+    <meta charset="utf-8">
     <title>That's not my neighbor</title>
-    <style>
-        .ui-controls { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        .btn { background: #333; color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-family: sans-serif; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="ui-controls"><a href="#" class="btn" onclick="event.preventDefault(); window.location.assign(window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/index.html');">Home</a></div>
+    <a href="/index.html" style="position:fixed; bottom:20px; right:20px; z-index:9999; background:#333; color:white; padding:10px 15px; border-radius:5px; text-decoration:none; font-family:sans-serif; opacity:0.8;">Home</a>
+
     <script src="main.js"></script>
-    <canvas id="canvas"></canvas>
-    <div id="status"><progress id="status-progress"></progress></div>
+    <div id="status">
+        <progress id="status-progress"></progress>
+    </div>
     <script src="thats-not-my-neighbor.js"></script>
     <script>
         const engine = new Engine({
